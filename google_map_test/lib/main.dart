@@ -3,7 +3,10 @@
 // import 'package:flutter/foundation.dart';
 // import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:google_map_test/current_location_user.dart';
+// import 'package:google_map_test/current_location_user.dart';
+import 'package:google_map_test/dark_mode_screen.dart';
+import 'package:google_map_test/provider/theme_provider.dart';
+import 'package:provider/provider.dart';
 // import 'package:google_map_test/mapstyle.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:geocoding/geocoding.dart';
@@ -22,13 +25,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const CurrentLocationUSer(),
+    return ChangeNotifierProvider(
+      create: (context) => ThemeChange(),
+      child: Builder(builder: (context) {
+        final themeMode = context.watch<ThemeChange>();
+        return MaterialApp(
+          themeMode: themeMode.getThemeMode,
+          darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              appBarTheme: AppBarTheme(backgroundColor: Colors.teal),
+              primarySwatch: Colors.purple),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch: Colors.blue,
+          ),
+          home: const DarkModeScreen(),
+        );
+      }),
     );
   }
 }

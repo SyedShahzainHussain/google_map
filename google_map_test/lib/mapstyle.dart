@@ -32,7 +32,7 @@ class _MapStyleState extends State<MapStyle> {
         actions: [
           PopupMenuButton(
             itemBuilder: (context) => [
-                PopupMenuItem(
+              PopupMenuItem(
                 child: const Text('Standard'),
                 onTap: () {
                   controller.future.then((value) {
@@ -53,7 +53,7 @@ class _MapStyleState extends State<MapStyle> {
                 },
               ),
               PopupMenuItem(
-                child: const Text('Dark'),
+                child:  Text('Dark'),
                 onTap: () {
                   controller.future.then((value) {
                     DefaultAssetBundle.of(context)
@@ -82,8 +82,7 @@ class _MapStyleState extends State<MapStyle> {
                   });
                 },
               ),
-            
-                PopupMenuItem(
+              PopupMenuItem(
                 child: const Text('Retro'),
                 onTap: () {
                   controller.future.then((value) {
